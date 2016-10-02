@@ -63,14 +63,22 @@ angular.module("ToDoListApp", [])
 
 	return {
 		restrict: 'E',
-		template: "<div class='col-md-2 contactCard' ng-repeat='item in dataset | filter:x.searchItem' ng-click='removeItem($index)'><h4>{{item.item}}</h4></div>",
+		template: "<div class='col-md-12 contactCard' ng-repeat='item in dataset | filter:x.searchItem' ng-click='completeItem($index)'><h4>{{item.item}}</h4></div>",
 		scope: {
 			dataset: '='
 		},
 		controller: controller,
 		link: function(scope, element, attrs){
-			scope.removeItem = function(i) {
-			ListUtility.remove(i);
+			// scope.removeItem = function(i) {
+			// ListUtility.remove(i);
+			// }
+			// scope.completeItem = function(i) {
+			// angular.element.	('contactCard').toggleClass('complete');
+			// console.log("run");
+			// }
+			scope.myClass = {complete:false};
+			scope.completeItem = function() {
+				scope.contactCard.complete=true;
 			}
       	}
 		// templateUrl: 'list-item.html'

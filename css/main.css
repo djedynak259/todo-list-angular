@@ -1,7 +1,7 @@
 .top {
    	height: 100vh;
    	text-align: center;
-	width: 90%;
+	width: 70%;
 	margin: 0 auto;
 }
 
@@ -9,9 +9,14 @@
 	box-sizing: border-box;
 	border: 1px solid grey;
 	border-radius: 4px;
-	min-height: 140px;
 	text-align: left;
-	padding: 16px 10px 16px;
+	padding: 8px;
 	margin: 12px;
-	width: 176px;
+	cursor: pointer;
+}
+
+.complete {
+	text-decoration: line-through;
+	color: grey;
+	border-color: grey;
 }

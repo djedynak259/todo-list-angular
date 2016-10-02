@@ -14,7 +14,7 @@
 	<div class="container-fuild top">
 		<div class="row">
 
-			<div ng-controller="AddItemCtrl" class="col-md-6">
+			<div ng-controller="AddItemCtrl" class="col-md-12">
 				<h2>Add Item</h2>
 				<form class="form-group" ng-submit="saveItem()">
 					<div class="form-group">
@@ -26,7 +26,7 @@
 				</form>
 			</div>	
 
-			<div class="col-md-6" ng-controller="searchItem">
+			<div class="col-md-12" ng-controller="searchItem">
 				<h2>Search List</h2>
 				<form class="form-group">
 					<div class="form-group">
@@ -39,7 +39,7 @@
 
 		<div class="container-fuild" ng-controller="removeItem">
 			<div class="row">	
-				<div ng-controller="listCtrl">
+				<div ng-controller="listCtrl"	>
 					<to-do-list-array dataset="items"></to-do-list-array>
 				</div>
 			</div>
