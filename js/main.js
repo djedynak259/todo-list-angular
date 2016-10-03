@@ -68,19 +68,19 @@ angular.module("ToDoListApp", [])
 			dataset: '='
 		},
 		controller: controller,
-		link: function(scope, element, attrs){
-			// scope.removeItem = function(i) {
-			// ListUtility.remove(i);
-			// }
-			// scope.completeItem = function(i) {
-			// angular.element.	('contactCard').toggleClass('complete');
-			// console.log("run");
-			// }
-			scope.myClass = {complete:false};
-			scope.completeItem = function() {
-				scope.contactCard.complete=true;
-			}
-      	}
+		// link: function(scope, element, attrs){
+		// 	// scope.removeItem = function(i) {
+		// 	// ListUtility.remove(i);
+		// 	// }
+		// 	// scope.completeItem = function(i) {
+		// 	// angular.element.	('contactCard').toggleClass('complete');
+		// 	// console.log("run");
+		// 	// }
+		// 	$scope.myClass = {red:false};
+		// 	scope.completeItem = function() {
+		// 		scope.contactCard.complete=true;
+		// 	}
+  //     	}
 		// templateUrl: 'list-item.html'
 	}
 }])
