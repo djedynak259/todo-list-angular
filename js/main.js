@@ -1,19 +1,27 @@
 angular.module("ToDoListApp", [])
 
-.factory('ListUtility', function(ListData){
+.factory('ListUtility', function($rootScope, ListData){
 	return {
 		addItem: addItem,
-		remove: remove,
+		clearAll: clearAll,
 		searchItem: ''
 	};
 
 	function addItem(item) {
+		item.completed = false;
 		ListData.push(item);
 	}
 
-	function remove(i){
-		ListData.splice(i,1);
+	function clearAll() {
+		ListData = ListData.filter(function(x) {
+			return !x.completed;
+		});
 
+		console.log(ListData);
+
+		$rootScope.$broadcast("clear:all", {
+			data: ListData
+		});
 	}
 
 })
@@ -21,22 +29,35 @@ angular.module("ToDoListApp", [])
 .factory ('ListData', function() {
 	return [
 		{
-			item:"To-DO list item #1"
+			item:"To-do list item #1",
+			completed: false
 		}, 
 		{
-			item:"To do list"
+			item:"To-do list item #2",
+			completed: false
 		}					
 	];
 })
 
-.controller('listCtrl', function($scope, ListData) {
+.controller('listCtrl', function($rootScope, $scope, ListData, ListUtility) {
 	$scope.items = ListData;
+
+	$rootScope.$on("clear:all", function(e, args) {
+		console.log(e, args);
+		
+		$scope.items = args.data;
+	});
+
+	$scope.clearAll = function() {
+		ListUtility.clearAll();
+	}
 })
 
 .controller('AddItemCtrl', function($scope, ListUtility) {
 	$scope.newitem = {};
 
 	$scope.saveItem = function() {
+
 		ListUtility.addItem($scope.newitem);
 		$scope.newitem={};
 	}
@@ -48,40 +69,34 @@ angular.module("ToDoListApp", [])
 	})
 })
 
-.controller('removeItem', function($scope, ListUtility) {
-
-	$scope.removeItem = function(i) {
-		ListUtility.remove(i);
-	}
-})	
-
 .directive('toDoListArray', ['ListUtility', function(ListUtility) {
+	var tpl = [
+	"<div class='col-md-12 contactCard' ng-class='{complete: item.completed}' ng-repeat='item in dataset | filter:x.searchItem' ng-click='completeItem(item)'>",
+		"<h4>{{item.item}}</h4>",
+	"</div>"
+	].join('');
 
 	function controller($scope, ListUtility) {
 		$scope.x = ListUtility;
+
+		$scope.completeItem = function(item) {
+			item.completed = !item.completed;
+		};
 	}
 
 	return {
 		restrict: 'E',
-		template: "<div class='col-md-12 contactCard' ng-repeat='item in dataset | filter:x.searchItem' ng-click='completeItem($index)'><h4>{{item.item}}</h4></div>",
+		template: tpl,
 		scope: {
 			dataset: '='
 		},
 		controller: controller,
-		// link: function(scope, element, attrs){
-		// 	// scope.removeItem = function(i) {
-		// 	// ListUtility.remove(i);
-		// 	// }
-		// 	// scope.completeItem = function(i) {
-		// 	// angular.element.	('contactCard').toggleClass('complete');
-		// 	// console.log("run");
-		// 	// }
-		// 	$scope.myClass = {red:false};
-		// 	scope.completeItem = function() {
-		// 		scope.contactCard.complete=true;
-		// 	}
-  //     	}
-		// templateUrl: 'list-item.html'
+		link: function(scope, element, attrs){
+		 	// scope.removeItem = function(i) {
+		 	// ListUtility.remove(i);
+		 	// }
+			
+       	}
 	}
 }])
 

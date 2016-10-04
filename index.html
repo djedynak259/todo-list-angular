@@ -37,9 +37,10 @@
 
 		</div>	
 
-		<div class="container-fuild" ng-controller="removeItem">
+		<div class="container-fuild">
 			<div class="row">	
-				<div ng-controller="listCtrl"	>
+				<div ng-controller="listCtrl">
+					<button ng-click="clearAll()">Clear All</button>
 					<to-do-list-array dataset="items"></to-do-list-array>
 				</div>
 			</div>
