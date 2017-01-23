@@ -54,8 +54,7 @@ angular.module("ToDoListApp", [])
 })
 
 .controller('AddItemCtrl', function($scope, ListUtility) {
-	$scope.newitem = {};
-
+	
 	$scope.saveItem = function() {
 
 		ListUtility.addItem($scope.newitem);
