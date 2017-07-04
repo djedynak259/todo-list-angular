@@ -1,8 +1,12 @@
+body {
+	background: url('../img/background.jpg')no-repeat center center;
+}
+
 .top {
    	height: 100vh;
    	text-align: center;
-	width: 70%;
-	margin: 0 auto;
+		width: 70%;
+		margin: 0 auto;
 }
 
 .contactCard {
